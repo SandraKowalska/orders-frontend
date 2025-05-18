@@ -1,0 +1,21 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Wprowadz dane faktury:</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Nazwa</label>
+      <input type="text" class="form-control" id="computerName" [(ngModel)]="computerInvoice.computerName"
+        name="computerName">
+    </div>
+    <div class="form-group">
+      <label>Data ksiegowania</label>
+      <input type="text" class="form-control" id="postingDate" [(ngModel)]="computerInvoice.postingDate"
+        name="postingDate">
+    </div>
+    <div class="form-group">
+      <label>Koszt [USD]</label>
+      <input type="text" class="form-control" id="computerCost_in_USD" [(ngModel)]="computerInvoice.computerCost_in_USD"
+        name="computerCost_in_USD">
+    </div>
+    <button class="btn btn-success" type="submit">Submit</button>
+  </form>
+</div>
