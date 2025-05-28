@@ -15,11 +15,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let computerInvoice of computerInvoices">
-          <td>{{ computerInvoice.id }}</td>
+          <td>{{ computerInvoice.id }}
+            <button class="btn btn-danger" (click)="deleteComputerInvoice(computerInvoice.id)">Usun</button>
+          </td>
           <td>{{ computerInvoice.computerName }}</td>
           <td>{{ computerInvoice.postingDate }}</td>
           <td>{{ computerInvoice.computerCost_in_USD }}</td>
-          <td>{{ computerInvoice.computerCost_in_PLN }}</td>
+          <td>{{ computerInvoice.computerCost_in_PLN }}
+          <td>
         </tr>
       </tbody>
     </table>

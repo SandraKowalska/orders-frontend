@@ -46,4 +46,10 @@ export class ComputerInvoiceListComponent implements OnInit {
     if (this.filters.sort === '-${field}') return '▼ ';
     return '';
   }
+
+  deleteComputerInvoice(id: number): void {
+    this.computerInvoiceService.deleteComputerInvoice(id).subscribe(() => {
+      this.searchComputerInvoice();
+    })
+  }
 }

@@ -33,4 +33,8 @@ export class ComputerInvoiceService {
     if (filters.sort) params = params.set('sort', filters.sort);
     return this.http.get<ComputerInvoice[]>(this.searchComputerInvoiceUrl, { params });
   }
+
+  public deleteComputerInvoice(id: number): Observable<ComputerInvoice> {
+    return this.http.delete<ComputerInvoice>(`${this.computerInvoiceUrl}/${id}`);
+  }
 }
