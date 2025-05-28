@@ -1,17 +1,14 @@
 <div class="card my-12">
   <div class="card-body">
-    <form nz-form style="text-align: left;" [formGroup]="searchForm">
-      <input nz-input placeholder="Wyszukaj komputer po nazwie" nzSize="large" style="width:25%;"
-        formControlName="word" />
-      <button nz-button nzType="primary" style="margin-left: 15px; margin-bottom: 15px;"
-        (click)="searchComputerInvoice()">Szukaj</button>
-    </form>
+    <div class="filters">
+      <input [(ngModel)]="filters.computerName" (input)="searchComputerInvoice()" placeholder="Nazwa komputera" />
+    </div>
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Nazwa</th>
-          <th scope="col">Data ksiegowania</th>
+          <th (click)="toggleSort('computerName')">Nazwa {{ sortIndicator('computerName') }}</th>
+          <th (click)="toggleSort('postingDate')">Data ksiegowania {{ sortIndicator('postingDate') }}</th>
           <th scope="col">Koszt [USD]</th>
           <th scope="col">Koszt [PLN]</th>
         </tr>

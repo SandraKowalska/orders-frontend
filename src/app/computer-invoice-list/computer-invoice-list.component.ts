@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComputerInvoice } from '../computer-invoice';
 import { ComputerInvoiceService } from '../computer-invoice.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-computer-invoice-list',
@@ -12,33 +11,39 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ComputerInvoiceListComponent implements OnInit {
 
   computerInvoices!: ComputerInvoice[];
-  searchForm!: FormGroup;
-
-  constructor(private computerInvoiceService: ComputerInvoiceService,
-    private fb: FormBuilder) {
+  filters = {
+    computerName: '',
+    postingDate: '',
+    sort: ''
   }
 
-  ngOnInit() {
-    this.searchForm = this.fb.group({
-      word: [null]
-    })
-    this.getComputerInvoices();
+  constructor(private computerInvoiceService: ComputerInvoiceService) {
   }
 
-  searchComputerInvoice() {
-    console.log(this.searchForm.value);
-    this.computerInvoiceService.searchComputerInvoiceByWord(
-      this.searchForm.get(["word"])!.value
-    ).subscribe(data => {
-      this.computerInvoices = data;
-      console.log(this.computerInvoices);
-    });
+  ngOnInit(): void {
+    this.searchComputerInvoice();
   }
 
-
-  getComputerInvoices() {
-    this.computerInvoiceService.findAll().subscribe(data => {
+  searchComputerInvoice(): void {
+    this.computerInvoiceService.searchComputerInvoiceByWord(this.filters).subscribe(data => {
       this.computerInvoices = data;
     });
+  }
+
+  toggleSort(field: string): void {
+    if (this.filters.sort === field) {
+      this.filters.sort = '-${field}'; //descending
+    } else if (this.filters.sort === '-${field}') {
+      this.filters.sort = field; //ascending
+    } else {
+      this.filters.sort = field;
+    }
+    this.searchComputerInvoice();
+  }
+
+  sortIndicator(field: string): string {
+    if (this.filters.sort === field) return '▲';
+    if (this.filters.sort === '-${field}') return '▼ ';
+    return '';
   }
 }
