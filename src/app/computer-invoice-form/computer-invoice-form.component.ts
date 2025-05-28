@@ -30,6 +30,7 @@ export class ComputerInvoiceFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.computerInvoice);
+    this.gotoComputerInvoiceList();
     this.saveInvoice();
   }
 }
